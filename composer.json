@@ -1,0 +1,16 @@
+{
+    "name": "developer/login",
+    "description": "PHP Login Example",
+    "type": "project",
+    "require": {
+        "components/jquery": "^3.3",
+        "twbs/bootstrap": "^4.3",
+        "components/font-awesome": "^5.4"
+    },
+    "authors": [
+        {
+            "name": "Jake Petty",
+            "email": "support@vexcon.net"
+        }
+    ]
+}
