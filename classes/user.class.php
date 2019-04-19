@@ -35,6 +35,19 @@ class User
     }
 
     /**
+     * Updates a users password
+     * 
+     * @param int $_id The id of the user you want to update
+     * @param int $_password The password the user to have
+     * 
+     * @return mixed
+     */
+
+    public function change_password($_id, $_password)
+    {
+        return $this->database->update($_id, 'password', $_password);
+    }
+    /**
      * Deletes a user from the database
      * 
      * @param int $_id The id of the user you want to delete
@@ -44,7 +57,7 @@ class User
 
     public function delete($_id)
     {
-        return $this->database->delete($_id);
+        return $this->database->update($_id);
     }
 
     /**

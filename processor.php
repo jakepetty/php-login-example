@@ -37,40 +37,75 @@ if (isset($_GET['action'])) {
             // Redirect back to the login page
             $flash->redirect('/?page=login');
             break;
-        case 'register': // Adds a user to the database and logs them in upon success
+            case 'register': // Adds a user to the database and logs them in upon success
+    
+                // Check if the required form fields are available
+                if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
+    
+                    // Move fields to easier to use variables
+                    $username = $_POST['username'];
+                    $password = $_POST['password'];
+                    $confirm_password = $_POST['confirm_password'];
+    
+                    // Check to see if the passwords match
+                    if ($password != $confirm_password) {
+                        $flash->set("Passwords don't match...");
+                        $flash->redirect('/?page=register');
+                    }
+    
+                    // Check if username already exists
+                    if ($user->check($username)) {
+                        $flash->set("Username is already in use");
+                    } else {
+    
+                        // Insert new user into the database
+                        $id = $user->add($username, $password);
+    
+                        if ($id) {
+    
+                            // Login the new user
+                            $login->login($username, $password);
+    
+                            // Redirect new user to the home page
+                            $flash->redirect();
+                        } else {
+                            $flash->set('Something went wrong while trying to register your username and password');
+                            $flash->redirect('/?page=register');
+                        }
+                    }
+                }
+                break;
+        case 'reset_password': // Adds a user to the database and logs them in upon success
 
             // Check if the required form fields are available
-            if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
+            if (isset($_POST['id']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
 
                 // Move fields to easier to use variables
-                $username = $_POST['username'];
+                $id = $_POST['id'];
                 $password = $_POST['password'];
                 $confirm_password = $_POST['confirm_password'];
 
                 // Check to see if the passwords match
                 if ($password != $confirm_password) {
                     $flash->set("Passwords don't match...");
-                    $flash->redirect('/?page=register');
+                    $flash->redirect('/?page=change_password&user_id='. $id);
                 }
+                $check = $user->database->read($id);
 
                 // Check if username already exists
-                if ($user->check($username)) {
-                    $flash->set("Username is already in use");
+                if (!$check) {
+                    $flash->set("User not found");
+                    $flash->redirect('/?page=change_password&user_id='. $id);
                 } else {
 
-                    // Insert new user into the database
-                    $id = $user->add($username, $password);
-
-                    if ($id) {
-
-                        // Login the new user
-                        $login->login($username, $password);
-
-                        // Redirect new user to the home page
+                    // Update user in the database
+                    if ($user->change_password($id, $password)) {
+                        // Redirect to the home page
+                        $flash->set(sprintf("%s's password has been changed", $check['username']), 'success');
                         $flash->redirect();
                     } else {
                         $flash->set('Something went wrong while trying to register your username and password');
-                        $flash->redirect('/?page=register');
+                        $flash->redirect('/?page=change_password&user_id='. $id);
                     }
                 }
             }

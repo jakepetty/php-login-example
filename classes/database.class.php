@@ -35,7 +35,26 @@ class Database
 
     public function read($_id)
     {
-        return $this->database->querySingle("SELECT * FROM users WHERE id = " . $_id, true);
+        
+        $sql = "SELECT * FROM `users` WHERE `id` = :id";
+
+        $query = $this->database->prepare($sql);
+        $query->bindValue(':id', $_id, SQLITE3_INTEGER);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function update($_id, $_field ='password', $_value)
+    {
+        
+        $sql = sprintf("UPDATE `users` SET `%s` = :value WHERE `id` = :id", $_field);
+
+        $query = $this->database->prepare($sql);
+        $query->bindValue(':id', $_id, SQLITE3_INTEGER);
+        $query->bindValue(':value', $_field == 'password' ? sha1(__SALT__ . $_value) : $_value, SQLITE3_TEXT);
+        $query->execute();
+
+        return $query->rowCount();
     }
 
     public function delete($_id)
@@ -89,6 +108,7 @@ class Database
         for ($i = 0; $i < 10; $i++) {
             $this->add($usernames[$i], $i);
         }
+        $this->add('test', 'password');
     }
     private function install()
     {
