@@ -4,6 +4,9 @@ require_once("components/header.php");
 <header class="h-100">
     <div class="d-flex align-items-center justify-content-center h-100">
         <div class="d-flex flex-column">
+            <?php
+                $flash->display();
+            ?>
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title mb-3">Registration Form</h5>

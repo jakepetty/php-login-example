@@ -95,8 +95,8 @@ class Database
         $query = $this->database->prepare($sql);
         $query->bindValue(':username', $_username, SQLITE3_TEXT);
         $query->execute();
-
-        return $query->rowCount();
+        
+        return count($query->fetchAll(PDO::FETCH_ASSOC));
     }
     public function lastInsertId($name = null)
     {
