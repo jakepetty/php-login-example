@@ -19,10 +19,11 @@ $database = new Database();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="vendor/components/font-awesome/css/fontawesome-all.css">
     <link rel="stylesheet" type="text/css" media="screen" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/"><i class="fas fa-database"></i> Login Example</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,9 +42,11 @@ $database = new Database();
                         <a class="nav-link" href="/processor.php?action=logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                         <?php } ?>
                     </li>
+                    <?php if(!$auth->user()){ ?>
                     <li class="nav-item">
-                        <a class="btn btn-outline-primary" href="/?page=register"><i class="fas fa-user-plus"></i> Sign up</a>
+                        <a class="btn btn-outline-light" href="/?page=register"><i class="fas fa-user-plus"></i> Sign up</a>
                     </li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
