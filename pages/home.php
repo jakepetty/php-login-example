@@ -3,7 +3,8 @@
     $flash->display();
     if (!$auth->user()) {
         ?>
-        <h2>PHP Login/User management Example</h2>
+        <p class="alert alert-warning">This demo is a test of Object-Oriented Programming and <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete"><i class="fas fa-external-link-alt" style="font-size:11px"></i> CRUD</a> functionality not design</p>
+        <h2>PHP Login/User Management Example</h2>
         <p>This is a custom made user registration/authentication and management system utilizing Twitter Bootstrap, SQLite3 and PHP. I built this using Object Oriented programming for fun. Click <a href="/?page=login">Login</a> to begin.</p>
     <?php } else { ?>
         <div class="row">
