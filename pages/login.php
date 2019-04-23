@@ -23,7 +23,7 @@ require_once("components/header.php");
                             <input id="password" class="form-control" type="password" name="password" placeholder="Your password...">
                         </div>
                         <button class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</button>
-                        <a href="/?page=register" class="btn btn-default"><i class="fas fa-user-plus"></i> Register</a>
+                        <a href="?page=register" class="btn btn-default"><i class="fas fa-user-plus"></i> Register</a>
                     </form>
                 </div>
             </div>

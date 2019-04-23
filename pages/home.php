@@ -5,7 +5,7 @@
         ?>
         <p class="alert alert-warning">This demo is a test of Object-Oriented Programming and <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete"><i class="fas fa-external-link-alt" style="font-size:11px"></i> CRUD</a> functionality not design</p>
         <h2>PHP Login/User Management Example</h2>
-        <p>This is a custom made user registration/authentication and management system utilizing Twitter Bootstrap, SQLite3 and PHP. I built this using Object Oriented programming for fun. Click <a href="/?page=login">Login</a> to begin.</p>
+        <p>This is a custom made user registration/authentication and management system utilizing Twitter Bootstrap, SQLite3 and PHP. I built this using Object Oriented programming for fun. Click <a href="?page=login">Login</a> to begin.</p>
     <?php } else { ?>
         <div class="row">
             <div class="col-sm-6">
@@ -38,8 +38,8 @@
                                         <td><?php echo $member['username']; ?></td>
                                         <td class="text-right">
                                             <div class="btn-group">
-                                                <a href="/?page=change_password&user_id=<?php echo $member["id"]; ?>" class="btn btn-sm btn-primary"><i class="fa fa-key"></i> Change Password</a>
-                                                <a href="/processor.php?action=delete&id=<?php echo $member["id"]; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to remove <?php echo $member['username']; ?>')"><i class="fa fa-trash"></i> Delete</a>
+                                                <a href="?page=change_password&user_id=<?php echo $member["id"]; ?>" class="btn btn-sm btn-primary"><i class="fa fa-key"></i> Change Password</a>
+                                                <a href="processor.php?action=delete&id=<?php echo $member["id"]; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to remove <?php echo $member['username']; ?>')"><i class="fa fa-trash"></i> Delete</a>
                                             </div>
                                         </td>
                                     </tr>

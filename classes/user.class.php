@@ -57,7 +57,7 @@ class User
 
     public function delete($_id)
     {
-        return $this->database->update($_id);
+        return $this->database->delete($_id);
     }
 
     /**

@@ -25,7 +25,7 @@ $database = new Database();
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="/"><i class="fas fa-database"></i> Login Example</a>
+            <a class="navbar-brand" href="index.php"><i class="fas fa-database"></i> Login Example</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -33,18 +33,18 @@ $database = new Database();
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.php"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <?php if (!$auth->user()) { ?>
-                        <a class="nav-link" href="/?page=login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        <a class="nav-link" href="?page=login"><i class="fas fa-sign-in-alt"></i> Login</a>
                         <?php } else { ?>
-                        <a class="nav-link" href="/processor.php?action=logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a class="nav-link" href="processor.php?action=logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                         <?php } ?>
                     </li>
                     <?php if(!$auth->user()){ ?>
                     <li class="nav-item">
-                        <a class="btn btn-outline-light" href="/?page=register"><i class="fas fa-user-plus"></i> Sign up</a>
+                        <a class="btn btn-outline-light" href="?page=register"><i class="fas fa-user-plus"></i> Sign up</a>
                     </li>
                     <?php } ?>
                 </ul>

@@ -3,7 +3,10 @@ class Flash
 {
     public function redirect($_url = null)
     {
-        header("location: " . ($_url ? $_url : '/'));
+        $parts = explode('/', $_SERVER['PHP_SELF']);
+        unset($parts[count($parts) - 1]);
+        $root = implode('/', $parts);
+        header("location: " . $root . $_url);
         exit();
     }
 
