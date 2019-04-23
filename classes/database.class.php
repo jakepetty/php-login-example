@@ -5,7 +5,7 @@ class Database
 {
     private $database;
 
-    public function Database()
+    public function __construct()
     {
 
         // Check if database exists
@@ -26,8 +26,8 @@ class Database
         $sql = "INSERT INTO `users` (`username`, `password`) VALUES(:username, :password);";
 
         $query = $this->database->prepare($sql);
-        $query->bindValue(':username', $_username, SQLITE3_TEXT);
-        $query->bindValue(':password', sha1(__SALT__ . $_password), SQLITE3_TEXT);
+        $query->bindValue(':username', $_username, 3);
+        $query->bindValue(':password', sha1(__SALT__ . $_password), 3);
         $query->execute();
 
         return $this->lastInsertId();
@@ -39,7 +39,7 @@ class Database
         $sql = "SELECT * FROM `users` WHERE `id` = :id";
 
         $query = $this->database->prepare($sql);
-        $query->bindValue(':id', $_id, SQLITE3_INTEGER);
+        $query->bindValue(':id', $_id, 1);
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
@@ -50,8 +50,8 @@ class Database
         $sql = sprintf("UPDATE `users` SET `%s` = :value WHERE `id` = :id", $_field);
 
         $query = $this->database->prepare($sql);
-        $query->bindValue(':id', $_id, SQLITE3_INTEGER);
-        $query->bindValue(':value', $_field == 'password' ? sha1(__SALT__ . $_value) : $_value, SQLITE3_TEXT);
+        $query->bindValue(':id', $_id, 1);
+        $query->bindValue(':value', $_field == 'password' ? sha1(__SALT__ . $_value) : $_value, 3);
         $query->execute();
 
         return $query->rowCount();
@@ -62,7 +62,7 @@ class Database
         $sql = "DELETE FROM `users` WHERE `id` = :id;";
 
         $query = $this->database->prepare($sql);
-        $query->bindValue(':id', $_id, SQLITE3_INTEGER);
+        $query->bindValue(':id', $_id, 1);
         $query->execute();
 
         return $query->rowCount();
@@ -73,8 +73,8 @@ class Database
         $sql = "SELECT `id`, `username` FROM `users` WHERE `username` = :username AND `password` = :password";
 
         $query = $this->database->prepare($sql);
-        $query->bindValue(':username', $_username, SQLITE3_TEXT);
-        $query->bindValue(':password', sha1(__SALT__ . $_password), SQLITE3_TEXT);
+        $query->bindValue(':username', $_username, 3);
+        $query->bindValue(':password', sha1(__SALT__ . $_password), 3);
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
@@ -93,7 +93,7 @@ class Database
         $sql = "SELECT * FROM `users` WHERE `username` = :username";
 
         $query = $this->database->prepare($sql);
-        $query->bindValue(':username', $_username, SQLITE3_TEXT);
+        $query->bindValue(':username', $_username, 3);
         $query->execute();
         
         return count($query->fetchAll(PDO::FETCH_ASSOC));
